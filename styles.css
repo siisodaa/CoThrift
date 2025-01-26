@@ -1,0 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #f8f9fa;
+}
+
+.btn-outline-primary {
+  margin: 0 5px;
+}
+
+.btn-outline-secondary {
+  margin: 0 5px;
+}
+
+.dropdown-menu-end {
+  right: 0;
+  left: auto;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+}
+
+.product-card .p-3 {
+  padding: 1rem;
+}
+
+.product-price {
+  font-size: 1.25rem;
+  color: #000;
+}

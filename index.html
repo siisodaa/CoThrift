@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoThrift - Sustainable Student Sharing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            box-sizing: border-box;
+        }
+
+        /* Colors and Variables */
+        :root {
+            --primary-green: #EAF4E2; /* Light green */
+            --primary-light-green: #F9FDF6; /* Very light green */
+            --background-gray: #FFFFFF; /* Bright white */
+            --text-dark-green: #375A47; /* Dark green */
+            --text-accent: #495867; /* Muted navy */
+            --accent-color: #F5D7AF; /* Light beige */
+            --hover-color: #F3C490; /* Warm beige for hover effects */
+            --card-shadow: rgba(0, 0, 0, 0.1); /* Light shadow */
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-green);
+            color: var(--text-dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 4rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            flex: 1;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        nav {
+            flex: 2;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-dark-green);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .cta-buttons {
+            flex: 1;
+            text-align: right;
+        }
+
+        .cta-buttons button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-buttons button:hover {
+            background: rgb(170, 157, 157);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-light-green));
+            color: var(--text-dark-green);
+            text-align: center;
+            padding: 6rem 2rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        .hero button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .hero button:hover {
+            background: rgb(135, 125, 125);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 5rem 2rem;
+            background: var(--primary-light-green);
+        }
+
+        .feature {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--card-shadow);
+            padding: 2.5rem;
+            text-align: center;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature h3 {
+            color: var(--text-dark-green);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .feature p {
+            color: var(--text-accent);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px var(--card-shadow);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #F9FDF6, #EAF4E2);
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 2rem auto;
+        max-width: 800px;
+    }
+
+    .how-it-works h2 {
+        font-size: 2rem;
+        color: #375A47;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .how-it-works .description {
+        font-size: 1.2rem;
+        color: #495867;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .cta-container {
+        margin-top: 1rem;
+    }
+
+    .cta-button {
+        background: black;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button:hover {
+        background: rgb(136, 125, 125);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--text-dark-green);
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+        /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 500px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: #000;
+    }
+
+    .modal-content h3 {
+        margin-bottom: 1rem;
+        color: #375A47;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .modal-content form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .modal-content input {
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .submit-button {
+        background: black;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .submit-button:hover {
+        background: rgb(131, 113, 113);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="CoThrift.svg" alt="CoThrift Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#features">Features</a></li>
+            </ul>
+        </nav>
+        <div class="cta-buttons">
+            <button><a href="login.php">Login</a></button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to CoThrift</h1>
+        <p>Giving students the platform to connect, share, and recycle items sustainably—helping save money, reduce waste, and make a positive impact</p>
+        <button><a href="signup.php">Join Today</a></button>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <h3>Share Items</h3>
+            <p>Easily list items you no longer need and help others save money.</p>
+        </div>
+        <div class="feature">
+            <h3>Find What You Need</h3>
+            <p>Browse items available from other students around campus.</p>
+        </div>
+        <div class="feature">
+            <h3>Go Green</h3>
+            <p>Reduce waste and promote sustainability in your community.</p>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <h2>Couldn’t find your school on the list?</h2>
+        <p class="description">
+            Don’t worry! We’re constantly expanding. Request your school to be added today!
+        </p>
+        <div class="cta-container">
+            <button class="cta-button" onclick="openModal()">Request Your School</button>
+        </div>
+    </section>
+    
+   <!-- Modal -->
+<div id="schoolModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Request Your School</h3>
+        <form id="schoolForm">
+            <label for="schoolName">School Name:</label>
+            <input type="text" id="schoolName" name="schoolName" placeholder="Enter your school name" required>
+
+            <label for="schoolLocation">School Location:</label>
+            <input type="text" id="schoolLocation" name="schoolLocation" placeholder="Enter your school location" required>
+
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+</div>
+         
+    
+
+    <!-- <footer>
+        <p>&copy; 2025 CoThrift. All rights reserved.</p>
+    </footer> -->
+
+    <script>
+        // JavaScript for Modal Functionality
+    function openModal() {
+        document.getElementById("schoolModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("schoolModal").style.display = "none";
+    }
+
+    // Close modal when clicking outside the content
+    window.onclick = function(event) {
+        const modal = document.getElementById("schoolModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    // Form submission handler
+    document.getElementById("schoolForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const schoolName = document.getElementById("schoolName").value;
+        const schoolLocation = document.getElementById("schoolLocation").value;
+        closeModal();
+    });
+    </script>
+</body>
+</html>
